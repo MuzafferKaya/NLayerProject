@@ -60,9 +60,6 @@ namespace Api.Controllers.v1
             try
             {
                 var customer = _mapper.Map<Customer>(request);
-                if (!TryValidateModel(customer))
-                    return BadRequest();
-
                 var updatedCustomer = await _customerService.UpdateAsync(customer);
                 await _unitOfWork.CommitTransactionAsync();
                 return Ok(new { id = updatedCustomer });
